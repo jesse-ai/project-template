@@ -1,4 +1,4 @@
-# project-template
+# Jesse Project Template
 
 This is template from which you can create your own Jesse project. 
 
