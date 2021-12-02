@@ -11,3 +11,15 @@ git clone https://github.com/jesse-ai/project-template.git my-project
 # to create a .env file of yours
 cp .env.example .env
 ```
+
+## Docker (For DEVS only. Will change soon)
+Open the `/docker/docker-compose.yml` file and change `/Users/saleh/codes/jesse/jesse:/root/jesse-framework` to your local path for Jesse's source code. 
+
+Then while in the project run:
+
+```sh
+cd docker
+docker-compose up
+```
+
+That's it! Now open [localhost:9000](http://localhost:9000) in your browser to see the dashboard. 
