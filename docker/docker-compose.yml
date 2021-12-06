@@ -20,7 +20,7 @@ services:
 #      TODO: for dev only
       - /Users/saleh/codes/jesse/jesse:/root/jesse-framework
     container_name: jesse
-    command: jesse run
+    command: bash -c "jesse install-live --no-strict && jesse run"
 
   ### PostgreSQL ################################################
   postgres:
