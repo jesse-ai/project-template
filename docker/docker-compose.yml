@@ -3,10 +3,7 @@ version: '3.5'
 services:
   ### Jesse's Workspace ################################################
   jesse:
-#    image: salehmir/jesse:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: salehmir/jesse:latest
     depends_on:
       - postgres
       - redis
@@ -17,8 +14,6 @@ services:
       - "9000:9000"
     volumes:
       - ../:/home
-#      TODO: for dev only
-      - /Users/saleh/codes/jesse/jesse:/root/jesse-framework
     container_name: jesse
     command: bash -c "jesse install-live --no-strict && jesse run"
 
