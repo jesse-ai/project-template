@@ -36,12 +36,9 @@ services:
   ### Redis ################################################
   redis:
     image: redis:6-alpine
-    volumes:
-      - redis-data:/data
     ports:
       - "6379:6379"
     container_name: redis
     
 volumes:
   postgres-data:
-  redis-data:
