@@ -30,14 +30,15 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     container_name: postgres
 
   ### Redis ################################################
   redis:
     image: redis:6-alpine
-    volumes:
-      - ./redis-data:/data
     ports:
       - "6379:6379"
     container_name: redis
+    
+volumes:
+  postgres-data:
