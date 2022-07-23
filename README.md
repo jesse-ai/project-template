@@ -15,7 +15,6 @@ cp .env.example .env
 Then while in the project run:
 
 ```sh
-cd docker
 docker-compose up
 ```
 

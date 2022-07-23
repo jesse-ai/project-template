@@ -1,0 +1,56 @@
+version: '3.5'
+
+services:
+  ### Jesse's Workspace ################################################
+  jesse:
+    image: salehmir/jesse:0.37.1
+    depends_on:
+      - postgres
+      - redis
+    tty: true
+    env_file:
+      - .env
+    ports:
+      - "9000:9000"
+      # Jupyter Port
+      - "8888:8888"
+      - "5678:5678"
+    volumes:
+      - ./:/home
+    container_name: jesse
+    #py-spy
+    cap_add:
+     - SYS_PTRACE
+    command: bash -c "apt-get install -y procps && apt-get install -y pcregrep && pip install debugpy && pip install py-spy && pip install numba && jesse install-live --no-strict && jesse run && while sleep 1000; do :; done"
+    deploy:
+      resources:
+        reservations:
+          cpus: '10'
+          memory: 2G
+#        limits:
+#          cpus: '0.001'
+#          memory: 50M
+
+  ### PostgreSQL ################################################
+  postgres:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=jesse_user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=jesse_db
+    ports:
+      - "5433:5433"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    container_name: postgres
+
+  ### Redis ################################################
+  redis:
+    image: redis:6-alpine
+    ports:
+      - "6378:6378"
+    container_name: redis
+    
+volumes:
+  postgres-data:
