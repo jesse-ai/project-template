@@ -23,12 +23,12 @@
 /storage/json/*.json
 /storage/charts/*.png
 /storage/full-reports/*.html
+/storage/logs/backtest-mode/*.txt
 *.pyc
 /__pycache__
 /venv
 storage/logs/collect.txt
 __pycache__
-.vscode
 /.ipynb_checkpoints
 config.py
 live-config.py
