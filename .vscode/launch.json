@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+
+    //~/workspace/freqtrade$ source /home/matt/workspace/freqtrade/.env/bin/activate
+
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "jesse docker debug",
+            "type": "python",
+            "request": "launch",
+            "preLaunchTask": "killjesse",
+            "program": "/usr/local/bin/jesse",
+            "console": "integratedTerminal",
+            "args": ["run"]
+        },
+        {
+            "name": "jesse windows debug",
+            "type": "python",
+            "request": "launch",
+//            "preLaunchTask": "killjesse",
+            "program": "c:${pathSeparator}users${pathSeparator}${env:USERNAME}${pathSeparator}appdata${pathSeparator}local${pathSeparator}Programs${pathSeparator}Python${pathSeparator}Python39${pathSeparator}Scripts${pathSeparator}jesse.exe",
+            "console": "integratedTerminal",
+            "args": ["run"]
+        }
+    ]
+}
