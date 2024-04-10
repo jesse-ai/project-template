@@ -20,3 +20,18 @@ docker-compose up
 ```
 
 That's it! Now open [localhost:9000](http://localhost:9000) in your browser to see the dashboard. 
+
+## Usage on the command line
+
+You can also run commands from the command line. For example, to run the backtest:
+
+```sh
+python test-strategy.py
+```
+
+For that to work, you need to have the environment dependencies installed. 
+You can install them by running:
+
+```sh
+pip install -r requirements.txt
+```
