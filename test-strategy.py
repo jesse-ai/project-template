@@ -99,6 +99,7 @@ for symbol in symbols:
 averages = {k: sum(v) / len(v) for k, v in results.items()}
 # sort the averages dictionary by value
 sorted_averages = sorted(averages.items(), key=lambda item: item[1], reverse=True)
+ic(test_metric)
 ic(sorted_averages)
 
 
