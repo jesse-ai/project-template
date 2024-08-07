@@ -27,8 +27,6 @@ services:
       - POSTGRES_USER=jesse_user
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=jesse_db
-    ports:
-      - "5432:5432"
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
     container_name: postgres
@@ -36,8 +34,6 @@ services:
   ### Redis ################################################
   redis:
     image: redis:6-alpine
-    ports:
-      - "6379:6379"
     container_name: redis
     command: redis-server --save "" --appendonly no
     
