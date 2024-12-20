@@ -17,7 +17,7 @@ services:
     volumes:
       - ../:/home
     container_name: jesse
-    command: bash -c "jesse install-live --no-strict && jesse run"
+    command: bash -c "jesse install-live --no-strict && pip install -r requirements.txt && jesse run"
 
   ### PostgreSQL ################################################
   postgres:
