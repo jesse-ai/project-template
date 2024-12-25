@@ -1,0 +1,21 @@
+# vim: ft=systemd
+
+[Unit]
+Description=Redis 6 for Jesse
+After=local-fs.target network-online.target time-sync.target
+Requires=local-fs.target network-online.target time-sync.target
+
+[Container]
+Image=docker.io/redis:6-alpine
+Network=host
+User=redis
+Timezone=local
+Exec=redis-server --save "" --appendonly no
+
+[Service]
+Restart=always
+StartLimitInterval=0
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
