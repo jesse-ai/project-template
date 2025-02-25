@@ -30,12 +30,18 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
     container_name: postgres
+    # Add ports so that Jesse running natively on MacOS/Windows can access docker containers through localhost
+    ports:
+      - 5432:5432
 
   ### Redis ################################################
   redis:
     image: redis:6-alpine
     container_name: redis
     command: redis-server --save "" --appendonly no
-    
+    # Add ports so that Jesse running natively on MacOS/Windows can access docker containers through localhost
+    ports:
+      - 6379:6379
+
 volumes:
   postgres-data:
