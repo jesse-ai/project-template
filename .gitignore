@@ -34,3 +34,18 @@ config.py
 live-config.py
 routes.py
 .env
+
+# Docker sensitive data
+/docker/postgres-data/
+*.log
+/docker/.env
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb_checkpoints
+
+# Python cache
+__pycache__
+*.pyc
+/_pycache_
+/.pytest_cache

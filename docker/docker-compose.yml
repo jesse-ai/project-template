@@ -1,9 +1,10 @@
-version: '3.5'
-
 services:
   ### Jesse's Workspace ################################################
   jesse:
-    image: salehmir/jesse:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: jesse-custom:latest
     depends_on:
       - postgres
       - redis
@@ -17,7 +18,7 @@ services:
     volumes:
       - ../:/home
     container_name: jesse
-    command: bash -c "jesse install-live --no-strict && jesse run"
+    # The start.sh script launches both Jupyter and Jesse
 
   ### PostgreSQL ################################################
   postgres:
@@ -39,3 +40,4 @@ services:
     
 volumes:
   postgres-data:
+
