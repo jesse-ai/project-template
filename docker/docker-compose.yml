@@ -34,10 +34,12 @@ services:
     container_name: postgres
 
   ### Redis ################################################
+  ### Use a different port in ports and command section  ###
+  ### to use another port. Also change port in .env file ###
   redis:
     image: redis:6-alpine
     container_name: redis
-    command: redis-server --save "" --appendonly no
+    command: redis-server --save "" --appendonly no --port 6379
     
 volumes:
   postgres-data:
