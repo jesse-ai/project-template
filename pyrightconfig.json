@@ -1,0 +1,16 @@
+{
+  "typeCheckingMode": "off",
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+  "extraPaths": [
+    "C:/Users/Flakp/OneDrive/Dokumenty/Proiekty i Githuby/Jesse Trading Bot/my-bot/venv/Lib/site-packages"
+  ],
+  "executionEnvironments": [
+    {
+      "root": "C:/Users/Flakp/OneDrive/Dokumenty/Proiekty i Githuby/Jesse Trading Bot/my-bot",
+      "extraPaths": [
+        "C:/Users/Flakp/OneDrive/Dokumenty/Proiekty i Githuby/Jesse Trading Bot/my-bot/venv/Lib/site-packages"
+      ]
+    }
+  ]
+}

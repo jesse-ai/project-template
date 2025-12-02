@@ -1,0 +1,1 @@
+[ERROR | 2025-12-02T00:11:09] Session terminated as the result of an uncaught exception
