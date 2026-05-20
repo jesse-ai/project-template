@@ -190,10 +190,11 @@ Error Handling Workflow:
 Basic Workflow:
 1. Create Draft: Set up backtest parameters and routes
 2. Get Config: Retrieve system configuration for execution
-3. Run Backtest: Execute the backtest and monitor progress
+3. Run Backtest: Call `run_backtest(session_id)` — it returns immediately with `{"status": "started"}`. Then poll `get_backtest_session(session_id)` every few seconds until status is `"finished"` or `"stopped"`.
 
 Backtest Resume Rule (MCP reconnect-safe):
-- `run_backtest()` may fail at MCP transport/client level while the Jesse backtest process continues.
+- `run_backtest()` returns immediately — the Jesse backtest process runs independently in the background.
+- Always store the session_id before calling `run_backtest()`. If the conversation is interrupted, resume by polling the same session.
 - On reconnect, do NOT immediately start a new run.
 - First call `get_backtest_session(session_id)` for the existing session and inspect current state/results.
 - If session is still executing, continue polling the same session until completion or failure.
