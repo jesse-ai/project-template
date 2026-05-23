@@ -12,6 +12,8 @@ services:
       - ../.env
     ports:
       - "9000:9000"
+      # MCP Server Port
+      - "9002:9002"
       # Jupyter Port
       - "8888:8888"
       # LSP Port
