@@ -143,9 +143,11 @@ Data Import: Use MCP tools to import and manage historical candle data for backt
 
 Import Workflow (mandatory):
 1. Call `import_candles()` — it returns immediately with `{"status": "started", "import_id": "..."}`.
-2. **Immediately and automatically** begin polling `get_existing_candles()` every few seconds — do NOT ask the user to check or wait. This is your responsibility.
-3. Keep polling until the expected symbol/exchange appears (or its candle count stops growing for two consecutive polls).
+2. **Immediately and automatically** begin polling `get_candle_import_status(import_id)` every few seconds — do NOT ask the user to check or wait. This is your responsibility.
+3. Keep polling until `status` is `"finished"`.
 4. Only then report completion to the user.
+
+Note: Use `get_candle_import_status(import_id)` for polling during an active import — it's a fast Redis lookup. Only call `get_existing_candles()` when you need to inspect what data is in the database (e.g. to verify date coverage after completion).
 
 Import Resume Rule (MCP reconnect-safe):
 - Always store the import_id returned. If the conversation is interrupted, resume by checking coverage first.
