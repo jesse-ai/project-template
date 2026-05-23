@@ -142,11 +142,12 @@ Failure-safe rule:
 Data Import: Use MCP tools to import and manage historical candle data for backtesting.
 
 Import Resume Rule (MCP reconnect-safe):
-- `import_candles()` supports `import_id` and must be used to resume/retry interrupted imports.
-- If MCP transport/client disconnects but Jesse import keeps running, do NOT assume import stopped.
+- `import_candles()` returns immediately — the Jesse import process runs independently in the background.
+- Always store the import_id returned. If the conversation is interrupted, resume by checking coverage first.
 - After reconnect, first verify coverage with `get_existing_candles()` (or `get_candles()` for the exact route timeframe).
-- If data is still incomplete, call `import_candles(exchange, symbol, start_date, blocking=True, import_id=<previous_import_id>)` to continue the same import workflow.
-- Only start a brand-new import ID when no previous import ID exists.
+- If data is still incomplete, call `import_candles(exchange, symbol, start_date)` again — the server automatically skips candles that are already stored, so re-running from the same `start_date` is safe and efficient.
+- Note: passing the same `import_id` does NOT resume from a checkpoint; it simply starts a new process. The deduplication is handled by the storage layer regardless of import_id.
+- Poll `get_existing_candles()` periodically to confirm the data has landed.
 
 Reference: See `jesse://candle` resource for detailed import procedures, parameters, and examples.
 
