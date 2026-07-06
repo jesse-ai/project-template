@@ -1,0 +1,22 @@
+# Files to ignore during Docker build
+.git
+.gitignore
+.env
+.vscode
+.devcontainer
+README.md
+LICENSE
+storage/logs/*
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/*.pyd
+.Python
+*.so
+*.egg
+*.egg-info
+dist
+build
+.pytest_cache
+.coverage
+htmlcov
