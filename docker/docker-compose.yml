@@ -13,10 +13,6 @@ services:
     ports:
       # Dashboard, API, and MCP (http://localhost:9000/mcp)
       - "9000:9000"
-      # Direct MCP port, used only by older Jesse versions that served MCP on port 9002.
-      # Current versions keep this port inside the container and serve MCP on 9000 at /mcp,
-      # so this mapping has no effect with them and can be removed.
-      - "9002:9002"
       # Jupyter Port
       - "8888:8888"
       # LSP Port
