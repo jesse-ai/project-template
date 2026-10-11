@@ -3,17 +3,17 @@ version: '3.5'
 services:
   ### Jesse's Workspace ################################################
   jesse:
-    image: salehmir/jesse:latest
+    # A local candidate image can be tested without publishing a Jesse release.
+    image: ${JESSE_IMAGE:-salehmir/jesse:latest}
     depends_on:
-      - postgres
-      - redis
+      postgres:
+        condition: service_healthy
     tty: true
     env_file:
       - ../.env
     ports:
+      # Dashboard, API, and MCP (http://localhost:9000/mcp)
       - "9000:9000"
-      # MCP Server Port
-      - "9002:9002"
       # Jupyter Port
       - "8888:8888"
       # LSP Port
@@ -23,23 +23,25 @@ services:
     container_name: jesse
     command: bash -c "jesse install-live --no-strict && jesse run"
 
-  ### PostgreSQL ################################################
+  ### PostgreSQL with TimescaleDB #################################
   postgres:
-    image: postgres:14-alpine
+    # Pin the validated PG17 build; existing PG14 data needs migration before switching.
+    image: timescale/timescaledb:2.19.3-pg17
     restart: always
     environment:
       - POSTGRES_USER=jesse_user
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=jesse_db
+    # Wait for the TCP server after initialization; allow a minute of readiness retries.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
     container_name: postgres
 
-  ### Redis ################################################
-  redis:
-    image: redis:6-alpine
-    container_name: redis
-    command: redis-server --save "" --appendonly no
-    
 volumes:
   postgres-data:
