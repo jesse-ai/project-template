@@ -3,7 +3,8 @@ version: '3.5'
 services:
   ### Jesse's Workspace ################################################
   jesse:
-    image: salehmir/jesse:latest
+    # A local candidate image can be tested without publishing a Jesse release.
+    image: ${JESSE_IMAGE:-salehmir/jesse:latest}
     depends_on:
       postgres:
         condition: service_healthy

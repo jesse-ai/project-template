@@ -21,6 +21,20 @@ docker-compose up
 
 That's it! Now open [localhost:9000](http://localhost:9000) in your browser to see the dashboard.
 
+New Docker projects run Jesse and TimescaleDB on PostgreSQL 17. Jesse starts its
+coordinator automatically and configures candle storage and compression; no Redis
+service is needed. Ordinary PostgreSQL remains supported. Existing projects must
+follow the [database migration guide](https://docs.jesse.trade/docs/getting-started/timescaledb#faq)
+before changing their database image or reusing an older database directory.
+
+To test a locally built Jesse image without publishing it, run from `docker/`:
+
+```sh
+JESSE_IMAGE=jesse-candidate:local docker compose up -d
+```
+
+Omitting `JESSE_IMAGE` uses the official `salehmir/jesse:latest` image.
+
 ## AI assistants (MCP)
 
 Jesse serves MCP at your dashboard address plus `/mcp`, which is `http://localhost:9000/mcp` by default. Assistants must send `Authorization: Bearer <token>`, where the token is derived from the `PASSWORD` in your `.env`. See [MCP server setup](https://docs.jesse.trade/docs/mcp/setup) to create the token and connect your assistant.
