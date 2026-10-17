@@ -28,6 +28,9 @@ services:
     # Pin the validated PG17 build; existing PG14 data needs migration before switching.
     image: timescale/timescaledb:2.19.3-pg17
     restart: always
+    # The image sizes max_connections to the host's memory (25 on a 2 GB server). Each live
+    # session holds several connections, so a few sessions can exhaust that.
+    command: postgres -c max_connections=100
     environment:
       - POSTGRES_USER=jesse_user
       - POSTGRES_PASSWORD=password
