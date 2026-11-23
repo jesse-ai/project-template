@@ -12,12 +12,9 @@ services:
     env_file:
       - ../.env
     ports:
-      # Dashboard, API, and MCP (http://localhost:9000/mcp)
+      # Dashboard, API, code editor and MCP (http://localhost:9000/mcp). The code editor server
+      # listens inside the container only; the dashboard reaches it through this port.
       - "9000:9000"
-      # Jupyter Port
-      - "8888:8888"
-      # LSP Port
-      - "9001:9001"
     volumes:
       - ../:/home
     container_name: jesse

@@ -4,6 +4,8 @@
 /jesse.egg-info
 /.idea
 /storage/*.key
+# signs the dashboard's login tokens
+/storage/.auth-secret
 /storage/*.sqlite
 /storage/*.gz
 .DS_Store
